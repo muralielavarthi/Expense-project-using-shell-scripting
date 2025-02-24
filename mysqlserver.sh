@@ -11,7 +11,13 @@ LOGS_FOLDER="/home/ec2-user/logs"
 SCRIPT_NAME=$0
 FINAL_SCRIPT_NAME=$(echo $SCRIPT_NAME | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$FINAL_SCRIPT_NAME-$TIME_STAMP"
-mkdir /home/ec2-user/logs
+
+if [ -d $LOGS_FOLDER ]
+then
+    echo "$LOGS_FOLDER already exists.. SKIPPING"
+else
+    mkdir /home/ec2-user/logs
+fi
 
 rootCheck(){
     if [ $USER_ID -ne 0 ]
