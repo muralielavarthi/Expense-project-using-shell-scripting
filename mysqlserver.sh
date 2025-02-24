@@ -14,7 +14,7 @@ LOG_FILE="$LOGS_FOLDER/$FINAL_SCRIPT_NAME-$TIME_STAMP"
 
 if [ -d $LOGS_FOLDER ]
 then
-    echo "$LOGS_FOLDER already exists.. SKIPPING"
+    echo -e "$Y $LOGS_FOLDER already exists.. SKIPPING $N"
 else
     mkdir /home/ec2-user/logs
 fi
@@ -55,3 +55,6 @@ validate $? "mysql-server started"
 
 systemctl enable mysqld &>>$LOG_FILE 
 validate $? "mysql-server enabled"
+
+mysql_secure_installation --set -root -pass murali@123
+validate $? "setting password for root user"
