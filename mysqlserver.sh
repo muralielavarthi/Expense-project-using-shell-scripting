@@ -14,9 +14,9 @@ LOG_FILE="$LOGS_FOLDER/$FINAL_SCRIPT_NAME-$TIME_STAMP"
 
 if [ -d $LOGS_FOLDER ]
 then
-    echo -e "$Y $LOGS_FOLDER already exists.. SKIPPING $N"
+    echo -e "$Y $LOGS_FOLDER directory already exists.. SKIPPING $N"
 else
-    mkdir /home/ec2-user/logs
+    mkdir -p /home/ec2-user/logs #-p make idempotent(it will if not exists, otherwise it will skip)
 fi
 
 rootCheck(){
@@ -58,3 +58,5 @@ validate $? "mysql-server enabled"
 
 mysql_secure_installation --set -root -pass murali@123
 validate $? "setting password for root user"
+
+#what we can improve future here ? - fix this error while running script twices - "Password already set, You cannot reset the password with mysql_secure_installation"
