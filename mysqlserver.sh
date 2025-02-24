@@ -1,7 +1,7 @@
 #!/bin/bash
 
-G="\e[31m"
-R="\e[32m"
+R="\e[31m"
+G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
@@ -30,7 +30,7 @@ validate(){
     fi
 }
 rootCheck
-mkdir /home/ec2-user/logs
+#mkdir /home/ec2-user/logs
 
 echo -e "$Y Script started at: $TIME_STAMP $N"
 
