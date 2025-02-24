@@ -23,9 +23,9 @@ rootCheck(){
 validate(){
     if [ $1 -eq 0 ]
     then
-        echo -e "$2... $G Success $N" 
+        echo -e "$G $2... $G Success $N" 
     else
-        echo -e "$R $2... Failure $N"
+        echo -e "$R $2...  Failure $N"
         exit 1
     fi
 }
