@@ -11,6 +11,7 @@ LOGS_FOLDER="/home/ec2-user/logs"
 SCRIPT_NAME=$0
 FINAL_SCRIPT_NAME=$(echo $SCRIPT_NAME | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$FINAL_SCRIPT_NAME-$TIME_STAMP"
+mkdir /home/ec2-user/logs
 
 rootCheck(){
     if [ $USER_ID -ne 0 ]
@@ -30,7 +31,6 @@ validate(){
     fi
 }
 rootCheck
-mkdir /home/ec2-user/logs
 
 echo -e "$Y Script started at: $TIME_STAMP $N" &>>$LOG_FILE 
 
