@@ -15,7 +15,7 @@ LOG_FILE="$LOGS_FOLDER/$FINAL_SCRIPT_NAME-$TIME_STAMP"
 rootCheck(){
     if [ $USER_ID -ne 0 ]
     then
-        echo -e "$R Error:You should have root access to install" 
+        echo -e "$R Error:You should have root access to install" &>>$LOG_FILE 
         exit 1
     fi
 
@@ -23,29 +23,29 @@ rootCheck(){
 validate(){
     if [ $1 -eq 0 ]
     then
-        echo -e "$G $2... $G Success $N" 
+        echo -e "$G $2... $G Success $N" &>>$LOG_FILE 
     else
-        echo -e "$R $2...  Failure $N"
+        echo -e "$R $2...  Failure $N" &>>$LOG_FILE 
         exit 1
     fi
 }
 rootCheck
-#mkdir /home/ec2-user/logs
+mkdir /home/ec2-user/logs
 
-echo -e "$Y Script started at: $TIME_STAMP $N"
+echo -e "$Y Script started at: $TIME_STAMP $N" &>>$LOG_FILE 
 
-dnf list installed mysql-server 
+dnf list installed mysql-server &>>$LOG_FILE 
 
 if [ $? -ne 0 ]
 then
-    dnf install mysql-server -y 
+    dnf install mysql-server -y  &>>$LOG_FILE 
     validate $? "installing mysql-server"
 else
-    echo -e "$G msql-server already installed $N"
+    echo -e "$G msql-server already installed $N" &>>$LOG_FILE 
 fi
 
-systemctl start mysqld
+systemctl start mysqld &>>$LOG_FILE 
 validate $? "mysql-server started"
 
-systemctl enable mysqld
+systemctl enable mysqld &>>$LOG_FILE 
 validate $? "mysql-server enabled"
