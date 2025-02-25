@@ -7,7 +7,7 @@ N="\e[0m"
 
 TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
-LOGS_FOLDER="/home/ec2-user/logs"
+LOGS_FOLDER="/home/ec2-user/sql-logs"
 SCRIPT_NAME=$0
 FINAL_SCRIPT_NAME=$(echo $SCRIPT_NAME | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$FINAL_SCRIPT_NAME-$TIME_STAMP"
@@ -16,7 +16,7 @@ if [ -d $LOGS_FOLDER ]
 then
     echo -e "$Y $LOGS_FOLDER directory already exists.. SKIPPING $N"
 else
-    mkdir -p /home/ec2-user/logs #-p make idempotent(it will if not exists, otherwise it will skip)
+    mkdir -p /home/ec2-user/sql-logs #-p make idempotent(it will if not exists, otherwise it will skip)
 fi
 
 rootCheck(){
