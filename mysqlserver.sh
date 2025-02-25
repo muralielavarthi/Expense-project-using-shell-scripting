@@ -56,7 +56,7 @@ validate $? "mysql-server restarted"
 systemctl enable mysqld &>>$LOG_FILE 
 validate $? "mysql-server enabled"
 
-mysql -h 172.31.82.58 -u root -pExpenseApp@1 -e 'show databases;'
+mysql -h 172.31.82.58 -u root -pExpenseApp@1 -e 'show databases;'&>>$LOG_FILE 
 
 if [ $? -ne 0 ]
 then
