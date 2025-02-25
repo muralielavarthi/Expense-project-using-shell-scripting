@@ -57,13 +57,14 @@ systemctl enable mysqld &>>$LOG_FILE
 validate $? "mysql-server enabled"
 
 mysql -h 172.31.82.58 -u root -pExpenseApp@1 -e 'show databases;'&>>$LOG_FILE 
+#e to write show query in command line instead of mysqlclient
 
 if [ $? -ne 0 ]
 then
     mysql_secure_installation --set -root -pass root &>>$LOG_FILE
     validate $? "root password setting now..." 
 else
-    echo "$G Default root password has been set..Skipping $N"
+    echo -e "$G Default root password has been set..Skipping $N"
 fi
 
 
