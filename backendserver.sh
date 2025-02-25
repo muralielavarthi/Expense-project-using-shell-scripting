@@ -76,8 +76,15 @@ validate $? "unzip latest code"
 npm install &>>$LOG_FILE
 validate $? "installing dependencies"
 
-useradd expense &>>$LOG_FILE
-validate $? "creating expense user"
+id expense
+
+if [ $? -ne 0]
+then
+    useradd expense2 &>>$LOG_FILE
+    validate $? "creating expense user"
+else
+    echo "$G expene user already exists.. $N"
+fi
 
 cp backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
 validate $? "creating systemctl service"
