@@ -56,7 +56,15 @@ validate $? "mysql-server started"
 systemctl enable mysqld &>>$LOG_FILE 
 validate $? "mysql-server enabled"
 
-mysql_secure_installation --set -root -pass murali@123
+
+mysql -h -u root -proot 
+
+if [ $? -ne 0]
+then
+    mysql_secure_installation --set -root -pass root
+else
+    echo "Default root password has been set..Skipping"
+fi
+
 validate $? "setting password for root user"
 
-#what we can improve future here ? - fix this error while running script twices - "Password already set, You cannot reset the password with mysql_secure_installation"
