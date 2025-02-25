@@ -79,7 +79,7 @@ validate $? "installing dependencies"
 
 id expense &>>$LOG_FILE
 
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
     useradd expense2 &>>$LOG_FILE
     validate $? "creating expense user"
@@ -87,7 +87,7 @@ else
     echo -e "$G expene user already exists.. $N"
 fi
 
-cp /home/ec2-user/backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
+cp /home/ec2-user/backend.service /etc/systemd/system &>>$LOG_FILE
 validate $? "creating systemctl service"
 
 systemctl start backend &>>$LOG_FILE
