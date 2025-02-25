@@ -14,7 +14,7 @@ LOG_FILE="$LOGS_FOLDER/$FINAL_SCRIPT_NAME-$TIME_STAMP"
 
 if [ -d $LOGS_FOLDER ]
 then
-    echo -e "$Y $LOGS_FOLDER directory already exists.. SKIPPING $N"
+    echo -e "$Y $LOGS_FOLDER directory already exists.. SKIPPING $N" &>>$LOG_FILE 
 else
     mkdir -p /home/ec2-user/logs #-p make idempotent(it will if not exists, otherwise it will skip)
 fi
@@ -59,12 +59,12 @@ validate $? "mysql-server enabled"
 
 mysql -h 172.31.84.152 -u root -proot &>>$LOG_FILE 
 
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
-    mysql_secure_installation --set -root -pass root &>>$LOG_FILE 
+    mysql_secure_installation --set -root -pass root &>>$LOG_FILE
+    validate $? "root password setting now..."  &>>$LOG_FILE 
 else
     echo "$G Default root password has been set..Skipping $N" &>>$LOG_FILE 
 fi
 
-validate $? "setting password for root user"
 
