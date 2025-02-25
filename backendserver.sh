@@ -49,7 +49,7 @@ then
     validate $? "disabled nodejs"
     dnf module list enable nodejs:20  &>>$LOG_FILE 
     validate $? "enabled nodejs 20"
-    dnf install nodejs &>>$LOG_FILE 
+    dnf install nodejs -y &>>$LOG_FILE 
     validate $? "installing nodejs"
 else
     echo -e "$G msql-server already installed $N" 
