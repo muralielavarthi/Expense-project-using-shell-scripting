@@ -87,7 +87,7 @@ else
     echo -e "$G expene user already exists.. $N"
 fi
 
-cp /home/ec2-user/backend.service /etc/systemd/system &>>$LOG_FILE
+cp /home/ec2-user/expense_project/backend.service /etc/systemd/system &>>$LOG_FILE
 validate $? "creating systemctl service"
 
 systemctl start backend &>>$LOG_FILE
