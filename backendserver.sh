@@ -67,8 +67,9 @@ fi
 curl https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip -o /tmp/backend.zip &>>$LOG_FILE
 validate $? "downloading latest code"
 
-cp /tmp/backend.zip /app &>>$LOG_FILE
-validate $? "coping code to app directory"
+cd /app
+
+rm -rf /app/* # deployment means removing old code updating new code
 
 unzip /app/backend.zip &>>$LOG_FILE
 validate $? "unzip latest code"
@@ -76,17 +77,17 @@ validate $? "unzip latest code"
 npm install &>>$LOG_FILE
 validate $? "installing dependencies"
 
-id expense
+id expense &>>$LOG_FILE
 
 if [ $? -ne 0]
 then
     useradd expense2 &>>$LOG_FILE
     validate $? "creating expense user"
 else
-    echo "$G expene user already exists.. $N"
+    echo -e "$G expene user already exists.. $N"
 fi
 
-cp backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
+cp /home/ec2-user/backend.service /etc/systemd/system/backend.service &>>$LOG_FILE
 validate $? "creating systemctl service"
 
 systemctl start backend &>>$LOG_FILE
