@@ -57,7 +57,7 @@ systemctl enable mysqld &>>$LOG_FILE
 validate $? "mysql-server enabled"
 
 
-mysql -h localhost -u root -proot &>>$LOG_FILE 
+mysql >>$LOG_FILE 
 
 if [ $? -ne 0 ]
 then
