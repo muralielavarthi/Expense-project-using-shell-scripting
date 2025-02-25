@@ -71,7 +71,7 @@ cd /app
 
 rm -rf /app/* # deployment means removing old code updating new code
 
-unzip /app/backend.zip &>>$LOG_FILE
+unzip /tmp/backend.zip &>>$LOG_FILE
 validate $? "unzip latest code"
 
 npm install &>>$LOG_FILE
