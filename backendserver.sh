@@ -67,7 +67,7 @@ fi
 #curl https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip -o /tmp/backend.zip $>>$LOG_FILE
 #validate $? "downloading latest code"
 
-cp backend.zip /app &>>$LOG_FILE
+cp /tmp/backend.zip /app &>>$LOG_FILE
 validate $? "moving to app directory"
 
 unzip /tmp/backend.zip &>>$LOG_FILE
