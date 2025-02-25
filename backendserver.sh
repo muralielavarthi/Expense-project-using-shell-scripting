@@ -70,7 +70,7 @@ fi
 cp /tmp/backend.zip /app &>>$LOG_FILE
 validate $? "moving to app directory"
 
-unzip /tmp/backend.zip &>>$LOG_FILE
+unzip /app/backend.zip &>>$LOG_FILE
 validate $? "unzip latest code"
 
 npm install &>>$LOG_FILE
