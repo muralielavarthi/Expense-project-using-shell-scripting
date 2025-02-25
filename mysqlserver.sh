@@ -57,13 +57,13 @@ systemctl enable mysqld &>>$LOG_FILE
 validate $? "mysql-server enabled"
 
 
-mysql -h -u root -proot 
+mysql -h -u root -proot &>>$LOG_FILE 
 
 if [ $? -ne 0]
 then
-    mysql_secure_installation --set -root -pass root
+    mysql_secure_installation --set -root -pass root &>>$LOG_FILE 
 else
-    echo "Default root password has been set..Skipping"
+    echo "$G Default root password has been set..Skipping $N" &>>$LOG_FILE 
 fi
 
 validate $? "setting password for root user"
