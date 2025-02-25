@@ -52,7 +52,7 @@ then
     dnf install nodejs -y &>>$LOG_FILE 
     validate $? "installing nodejs"
 else
-    echo -e "$G msql-server already installed $N" 
+    echo -e "$G nodejs already installed $N" 
 fi
 
 
@@ -64,11 +64,11 @@ else
     validate $? "$G Creating app folder $N"
 fi
 
-#curl https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip -o /tmp/backend.zip $>>$LOG_FILE
-#validate $? "downloading latest code"
+curl https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip -o /tmp/backend.zip $>>$LOG_FILE
+validate $? "downloading latest code"
 
 cp /tmp/backend.zip /app &>>$LOG_FILE
-validate $? "moving to app directory"
+validate $? "coping code to app directory"
 
 unzip /app/backend.zip &>>$LOG_FILE
 validate $? "unzip latest code"
