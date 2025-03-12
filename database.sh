@@ -4,7 +4,7 @@ TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
 
 ROOTUSER(){
-if [ USER_ID -ne 0 ]
+if [ $USER_ID -ne 0 ]
 then
     echo "You need root access to proceed"
     exit 1
