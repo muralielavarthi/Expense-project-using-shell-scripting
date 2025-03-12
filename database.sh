@@ -42,9 +42,8 @@ mysql -h 172.31.24.29 -u root -pExpenseApp@1 -e 'show databases;'
 
 if [ $? -ne 0 ]
 then
-    echo "MySQL Root password not setup"
     mysql_secure_installation --set-root-pass ExpenseApp@1
-    VALIDATE $? "Setting Root Password"
+    VALIDATE $? "Root Password setup"
 else
     echo "MySQL Root password already setup ...SKIPPING"
 fi
