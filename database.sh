@@ -1,3 +1,5 @@
+#!/bin/bash
+
 TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
 
