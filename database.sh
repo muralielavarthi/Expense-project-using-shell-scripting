@@ -38,7 +38,8 @@ VALIDATE $? "start mysqld"
 systemctl enable mysqld
 VALIDATE $? "enable mysqld"
 
-mysql -h 172.31.24.29 -u root -pm@123 -e "show databases"
+mysql -h 172.31.24.29 -u root -pm@123 -e 'show databases;'
+
 if [ $? -eq 0 ]
 then
     echo "root user passwd setup already done skipping..."
