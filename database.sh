@@ -2,6 +2,9 @@
 
 TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
+LOGS_FILE_NAME=echo $0 | cut -d "." -f1
+LOGS_FINAL_NAME="$LOGS_FILE_NAME-$TIME_STAMP"
+LOGS_FOLDER="database-logs"
 
 ROOTUSER(){
 if [ $USER_ID -ne 0 ]
@@ -21,6 +24,14 @@ VALIDATE(){
 }
 echo "script started executing at $TIME_STAMP"
 ROOTUSER
+
+if [ -d /home/ec2/$LOGS_FOLDER ]
+then
+    echo "Logs folder already created skipping.."
+else
+    mkdir -p /home/ec2/$LOGS_FOLDER
+    echo "logs folder created"
+fi
 
 dnf list installed mysql-server
 if [ $? -eq 0 ]
