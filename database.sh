@@ -25,7 +25,7 @@ VALIDATE(){
 echo "script started executing at $TIME_STAMP"
 ROOTUSER
 
-if [ -d /home/ec2/$LOGS_FOLDER ]
+if [ -d /home/ec2-user/$LOGS_FOLDER ]
 then
     echo "Logs folder already created skipping.."
 else
