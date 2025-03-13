@@ -31,8 +31,14 @@ else
     echo "logs folder created"
 fi
 
-dnf install nginx -y  &>>$LOGS_FINAL_NAME
-VALIDATE $? "Installing Nginx Server"
+dnf list installed nginx &>>$LOGS_FINAL_NAME
+if [ $? -eq 0 ]
+then
+    echo "nginx already installed skipping.."
+else
+    dnf install nginx -y  &>>$LOGS_FINAL_NAME
+    VALIDATE $? "Installing Nginx Server"
+fi
 
 systemctl enable nginx &>>$LOGS_FINAL_NAME
 VALIDATE $? "Enabling Nginx server"
