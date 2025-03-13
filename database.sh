@@ -3,10 +3,8 @@
 TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
 LOGS_FOLDER="database-logs"
-USER_HOME=$HOME
 LOGS_FILE_NAME=$(echo $0 | cut -d "." -f1)
-LOGS_FINAL_NAME="$USER_HOME/$LOGS_FOLDER/$LOGS_FILE_NAME-$TIME_STAMP"
-echo $LOGS_FINAL_NAME;
+LOGS_FINAL_NAME="/home/ec2-user/$LOGS_FOLDER/$LOGS_FILE_NAME-$TIME_STAMP"
 
 ROOTUSER(){
 if [ $USER_ID -ne 0 ]
