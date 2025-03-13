@@ -4,7 +4,7 @@ TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
 LOGS_FOLDER="backend-logs"
 LOGS_FILE_NAME=$(echo $0 | cut -d "." -f1)
-LOGS_FINAL_NAME="/home/ec2-user/$LOGS_FOLDER/$LOGS_FILE_NAME-$TIME_STAMP"
+LOGS_FINAL_NAME="/home/ec2-user/$LOGS_FOLDER/$LOGS_FILE_NAME-$TIME_STAMP.log"
 
 ROOTUSER(){
 if [ $USER_ID -ne 0 ]
@@ -73,13 +73,13 @@ VALIDATE $? "installing dependencies"
 id expense &>>$LOGS_FINAL_NAME
 if [ $? -eq 0 ]
 then
-    echo "expense already exist"
+    echo "expense user already exist"
 else
     useradd expense &>>$LOGS_FINAL_NAME
     VALIDATE $? "expense user creation"
 fi
 
-cp /home/ec2-user/Expense_Project_using_Shell_scripting/backend.service /etc/systemd/system/
+cp /home/ec2-user/Expense_Project_using_Shell_scripting/backend.service /etc/systemd/system/backend.service
 VALIDATE $? "copying backend.service file to system folder"
 
 systemctl daemon-reload &>>$LOGS_FINAL_NAME
@@ -91,5 +91,14 @@ VALIDATE $? "backend start"
 systemctl enable backend &>>$LOGS_FINAL_NAME
 VALIDATE $? "enable backend"
 
-mysql -h 172.31.30.40 -u root -pExpenseApp@1 </app/schema/backend.sql &>>$LOGS_FINAL_NAME
+dnf list installed mysql
+if [ $? -eq 0 ]
+then
+    echo "mysql client already installed"
+else
+    dnf install mysql -y &>>$LOGS_FINAL_NAME
+    VALIDATE $? "mysql client"
+fi
+
+mysql -h 172.31.19.237 -u root -pExpenseApp@1 </app/schema/backend.sql &>>$LOGS_FINAL_NAME
 VALIDATE $? "loading sql schema to database"

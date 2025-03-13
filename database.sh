@@ -4,7 +4,7 @@ TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
 LOGS_FOLDER="database-logs"
 LOGS_FILE_NAME=$(echo $0 | cut -d "." -f1)
-LOGS_FINAL_NAME="/home/ec2-user/$LOGS_FOLDER/$LOGS_FILE_NAME-$TIME_STAMP"
+LOGS_FINAL_NAME="/home/ec2-user/$LOGS_FOLDER/$LOGS_FILE_NAME-$TIME_STAMP.log"
 
 ROOTUSER(){
 if [ $USER_ID -ne 0 ]
@@ -49,7 +49,7 @@ VALIDATE $? "start mysqld"
 systemctl enable mysqld &>>$LOGS_FINAL_NAME
 VALIDATE $? "enable mysqld"
 
-mysql -h 172.31.30.40 -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGS_FINAL_NAME
+mysql -h 172.31.19.237 -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGS_FINAL_NAME
 
 if [ $? -ne 0 ]
 then

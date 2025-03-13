@@ -7,7 +7,7 @@ Description = Backend Service
 
 User=expense
 
-Environment=DB_HOST="172.31.82.58"
+Environment=DB_HOST="172.31.19.237"
 
 ExecStart=/bin/node /app/index.js
 
