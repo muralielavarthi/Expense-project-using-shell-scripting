@@ -33,27 +33,27 @@ else
     echo "logs folder created"
 fi
 
-dnf list installed mysql-server
+dnf list installed mysql-server &>$LOGS_FINAL_NAME
 if [ $? -eq 0 ]
 then 
     echo "mysql-server already installed skipping..."
 else
     echo "installing mysql-server"
-    dnf install mysql-server -y
+    dnf install mysql-server -y &>>$LOGS_FINAL_NAME
     VALIDATE $? "mysql-server installation"
 fi
 
-systemctl start mysqld
+systemctl start mysqld &>>$LOGS_FINAL_NAME
 VALIDATE $? "start mysqld"
 
-systemctl enable mysqld
+systemctl enable mysqld &>>$LOGS_FINAL_NAME
 VALIDATE $? "enable mysqld"
 
-mysql -h 172.31.30.40 -u root -pExpenseApp@1 -e 'show databases;'
+mysql -h 172.31.30.40 -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGS_FINAL_NAME
 
 if [ $? -ne 0 ]
 then
-    mysql_secure_installation --set-root-pass ExpenseApp@1
+    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGS_FINAL_NAME
     VALIDATE $? "Root Password setup"
 else
     echo "MySQL Root password already setup ...SKIPPING"
