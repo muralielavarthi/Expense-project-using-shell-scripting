@@ -88,4 +88,7 @@ VALIDATE $? "backend start"
 systemctl enable backend
 VALIDATE $? "enable backend"
 
+mysql -h 172.31.30.40 -u root -pExpenseApp@1 </app/schema/backend.sql
+VALIDATE $? "loading sql schema to database"
+
 
