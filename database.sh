@@ -3,7 +3,7 @@
 TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
 LOGS_FILE_NAME=$(echo $0 | cut -d "." -f1)
-LOGS_FINAL_NAME="$LOGS_FILE_NAME-$TIME_STAMP"
+LOGS_FINAL_NAME="/home/ec2-user/$LOGS_FILE_NAME-$TIME_STAMP"
 LOGS_FOLDER="database-logs"
 
 ROOTUSER(){
