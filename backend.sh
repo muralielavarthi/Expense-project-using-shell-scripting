@@ -91,7 +91,5 @@ VALIDATE $? "backend start"
 systemctl enable backend &>>$LOGS_FINAL_NAME
 VALIDATE $? "enable backend"
 
-mysql -h 172.31.30.40 -u root -pExpenseApp@1 </app/schema/backend.sql
+mysql -h 172.31.30.40 -u root -pExpenseApp@1 </app/schema/backend.sql &>>$LOGS_FINAL_NAME
 VALIDATE $? "loading sql schema to database"
-
-
