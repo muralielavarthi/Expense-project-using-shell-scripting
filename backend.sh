@@ -58,7 +58,7 @@ fi
 curl https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip -o /tmp/backend.zip
 VALIDATE $? "downloading code from remote"
 
-rm -rf/app/*
+rm -rf /app/*
 VALIDATE $? "removoing old code"
 
 cd /app
