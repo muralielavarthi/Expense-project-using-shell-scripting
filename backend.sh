@@ -58,8 +58,12 @@ fi
 curl https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip -o /tmp/backend.zip
 VALIDATE $? "downloading code from remote"
 
+rm -rf/app/*
+VALIDATE $? "removoing old code"
+
 cd /app
 VALIDATE $? "going inside /app directory"
+
 unzip /tmp/backend.zip
 VALIDATE $? "unzipping backend code"
 
@@ -71,18 +75,9 @@ if [ $? -eq 0 ]
 then
     echo "expense user already created"
 else    
-    echo "expense user created"
     useradd expense
+    echo "expense user created"
 if
 
 cp /home/ec2-user/Expense_Project_using_Shell_scripting/backend.service /etc/systemd/systemd/
 VALIDATE $? "copying backend.service file to /etc/systemd/systemd/ folder"
-
-systemctl daemon-reload
-VALIDATE $? "daemon-reload"
-
-systemctl start backend
-VALIDATE $? "backend start"
-
-systemctl enable backend
-VALIDATE $? "backend enable"
