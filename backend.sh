@@ -29,21 +29,21 @@ if [ -d /home/ec2-user/$LOGS_FOLDER ]
 then
     echo "Logs folder already created skipping.."
 else
-    mkdir -p /home/ec2-user/$LOGS_FOLDER
+    mkdir -p /home/ec2-user/$LOGS_FOLDER 
     echo "logs folder created"
 fi
 
-dnf list installed nodejs
+dnf list installed nodejs &>$LOGS_FINAL_NAME
 
 if [ $? -eq 0 ]
 then
     echo "nodejs already installed skipping.."
 else
-    dnf module disable nodejs -y
+    dnf module disable nodejs -y &>>$LOGS_FINAL_NAME
     VALIDATE $? "disable nodejs"
-    dnf module enable nodejs:20 -y
+    dnf module enable nodejs:20 -y &>>$LOGS_FINAL_NAME
     VALIDATE $? "enable nodejs version 20"
-    dnf install nodejs -y
+    dnf install nodejs -y &>>$LOGS_FINAL_NAME
     VALIDATE $? "nodejs installation"
 fi
 
@@ -55,7 +55,7 @@ else
     echo "app folder created"
 fi
 
-curl https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip -o /tmp/backend.zip
+curl https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip -o /tmp/backend.zip &>>$LOGS_FINAL_NAME
 VALIDATE $? "downloading code from remote"
 
 rm -rf /app/*
@@ -64,31 +64,31 @@ VALIDATE $? "removoing old code"
 cd /app
 VALIDATE $? "going inside /app directory"
 
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip &>>$LOGS_FINAL_NAME
 VALIDATE $? "unzipping backend code"
 
-npm install
+npm install &>>$LOGS_FINAL_NAME
 VALIDATE $? "installing dependencies"
 
-id expense
+id expense &>>$LOGS_FINAL_NAME
 if [ $? -eq 0 ]
 then
     echo "expense already exist"
 else
-    useradd expense
+    useradd expense &>>$LOGS_FINAL_NAME
     VALIDATE $? "expense user creation"
 fi
 
 cp /home/ec2-user/Expense_Project_using_Shell_scripting/backend.service /etc/systemd/system/
 VALIDATE $? "copying backend.service file to system folder"
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOGS_FINAL_NAME
 VALIDATE $? "daemon-reload"
 
-systemctl start backend
+systemctl start backend &>>$LOGS_FINAL_NAME
 VALIDATE $? "backend start"
 
-systemctl enable backend
+systemctl enable backend &>>$LOGS_FINAL_NAME
 VALIDATE $? "enable backend"
 
 mysql -h 172.31.30.40 -u root -pExpenseApp@1 </app/schema/backend.sql
