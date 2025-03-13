@@ -2,7 +2,7 @@
 
 TIME_STAMP=$(date +"%d-%m-%y-%H-%M-%S")
 USER_ID=$(id -u)
-LOGS_FILE_NAME=echo $0 | cut -d "." -f1
+LOGS_FILE_NAME=$(echo $0 | cut -d "." -f1)
 LOGS_FINAL_NAME="$LOGS_FILE_NAME-$TIME_STAMP"
 LOGS_FOLDER="database-logs"
 
@@ -29,7 +29,7 @@ if [ -d /home/ec2-user/$LOGS_FOLDER ]
 then
     echo "Logs folder already created skipping.."
 else
-    mkdir -p /home/ec2/$LOGS_FOLDER
+    mkdir -p /home/ec2-user/$LOGS_FOLDER
     echo "logs folder created"
 fi
 
