@@ -47,7 +47,7 @@ else
     VALIDATE $? "nodejs installation"
 fi
 
-if [ -d /app]
+if [ -d /app ]
 then
     echo "app folder already created skipping.."
 else
