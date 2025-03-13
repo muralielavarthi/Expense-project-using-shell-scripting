@@ -78,3 +78,14 @@ else
     useradd expense
     VALIDATE $? "expense user creation"
 fi
+
+cp /home/ec2-user/Expense_Project_using_Shell_scripting /etc/systemd/system/
+VALIDATE $? "copying backend.service file to system folder"
+
+systemctl start backend
+VALIDATE $? "backend start"
+
+systemctl enable backend
+VALIDATE $? "enable backend"
+
+
