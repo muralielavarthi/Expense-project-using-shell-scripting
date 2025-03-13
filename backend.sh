@@ -69,3 +69,12 @@ VALIDATE $? "unzipping backend code"
 
 npm install
 VALIDATE $? "installing dependencies"
+
+id expense
+if [ $? -eq 0 ]
+then
+    echo "expense already exist"
+else
+    useradd expense
+    VALIDATE $? "expense user creation"
+fi
