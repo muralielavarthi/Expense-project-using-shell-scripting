@@ -69,15 +69,3 @@ VALIDATE $? "unzipping backend code"
 
 npm install
 VALIDATE $? "installing dependencies"
-
-id expense
-if [ $? -eq 0 ]
-then
-    echo "expense user already created"
-else    
-    useradd expense
-    echo "expense user created"
-if
-
-cp /home/ec2-user/Expense_Project_using_Shell_scripting/backend.service /etc/systemd/systemd/
-VALIDATE $? "copying backend.service file to /etc/systemd/systemd/ folder"
