@@ -91,7 +91,7 @@ VALIDATE $? "backend start"
 systemctl enable backend &>>$LOGS_FINAL_NAME
 VALIDATE $? "enable backend"
 
-dnf list installed mysql
+dnf list installed mysql &>>$LOGS_FINAL_NAME
 if [ $? -eq 0 ]
 then
     echo "mysql client already installed"
