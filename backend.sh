@@ -39,10 +39,19 @@ if [ $? -eq 0 ]
 then
     echo "nodejs already installed skipping.."
 else
-    dnf module disable nodejs
+    dnf module disable nodejs -y
     VALIDATE $? "disable nodejs"
-    dnf module enable nodejs:20
+    dnf module enable nodejs:20 -y
     VALIDATE $? "enable nodejs version 20"
     dnf install nodejs -y
     VALIDATE $? "nodejs installation"
 fi
+
+if [ -d /app]
+then
+    echo "app folder already created skipping.."
+else
+    mkdir -p /app
+    echo "app folder created"
+fi
+
