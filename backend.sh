@@ -82,6 +82,9 @@ fi
 cp /home/ec2-user/Expense_Project_using_Shell_scripting/backend.service /etc/systemd/system/
 VALIDATE $? "copying backend.service file to system folder"
 
+systemctl daemon-reload
+VALIDATE $? "daemon-reload"
+
 systemctl start backend
 VALIDATE $? "backend start"
 
