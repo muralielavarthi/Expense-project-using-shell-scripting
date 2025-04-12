@@ -27,7 +27,7 @@ if [ -d /home/ec2-user/$LOGS_FOLDER ]
 then
     echo "Logs folder already created skipping.."
 else
-    mkdir -p /home/ec2-user/$LOGS_FOLDER
+    mkdir /home/ec2-user/$LOGS_FOLDER
     echo "logs folder created"
 fi
 
@@ -58,7 +58,7 @@ VALIDATE $? "Moving to HTML directory"
 unzip /tmp/frontend.zip &>>$LOGS_FINAL_NAME
 VALIDATE $? "unzipping the frontend code"
 
-cp /home/ec2-user/Expense_Project_using_Shell_scripting/expense.conf /etc/nginx/default.d/expense.conf
+cp /home/ec2-user/Expense-project-using-shell-scripting/expense.conf /etc/nginx/default.d/expense.conf
 VALIDATE $? "Copied expense config"
 
 systemctl restart nginx &>>$LOGS_FINAL_NAME
