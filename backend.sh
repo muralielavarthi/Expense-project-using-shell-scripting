@@ -51,7 +51,7 @@ if [ -d /app ]
 then
     echo "app folder already created skipping.."
 else
-    mkdir -p /app
+    mkdir /app
     echo "app folder created"
 fi
 
