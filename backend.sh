@@ -79,7 +79,7 @@ else
     VALIDATE $? "expense user creation"
 fi
 
-cp /home/ec2-user/Expense_Project_using_Shell_scripting/backend.service /etc/systemd/system/
+cp /home/ec2-user/Expense-project-using-shell-scripting/backend.service /etc/systemd/system/
 VALIDATE $? "copying backend.service file to system folder"
 
 systemctl daemon-reload &>>$LOGS_FINAL_NAME
