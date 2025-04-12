@@ -29,7 +29,7 @@ if [ -d /home/ec2-user/$LOGS_FOLDER ]
 then
     echo "Logs folder already created skipping.."
 else
-    mkdir -p /home/ec2-user/$LOGS_FOLDER 
+    mkdir /home/ec2-user/$LOGS_FOLDER 
     echo "logs folder created"
 fi
 
