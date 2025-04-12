@@ -50,6 +50,7 @@ systemctl enable mysqld &>>$LOGS_FINAL_NAME
 VALIDATE $? "enable mysqld"
 
 mysql -h 172.31.19.237 -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGS_FINAL_NAME
+#-e : It allows you to run a SQL statement directly from the command line without going into the interactive MySQL shell.
 
 if [ $? -ne 0 ]
 then
